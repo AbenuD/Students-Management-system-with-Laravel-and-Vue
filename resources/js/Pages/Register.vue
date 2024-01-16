@@ -8,9 +8,10 @@
         <form>
           <div class="grid grid-cols-2 gap-4">
             <div class="mb-4">
-              <label for="name" class="block mb-2 text-sm text-gray-600"
-                >Name</label
-              >
+              <label for="name" class="block mb-2 text-sm text-gray-600">
+                Name
+              </label>
+
               <input
                 type="text"
                 id="name"
@@ -20,9 +21,10 @@
               />
             </div>
             <div class="mb-4">
-              <label for="f_name" class="block mb-2 text-sm text-gray-600"
-                >Father Name</label
-              >
+              <label for="f_name" class="block mb-2 text-sm text-gray-600">
+                Father Name
+              </label>
+
               <input
                 type="text"
                 id="f_name"
@@ -32,9 +34,10 @@
               />
             </div>
             <div class="mb-4">
-              <label for="address" class="block mb-2 text-sm text-gray-600"
-                >Address</label
-              >
+              <label for="address" class="block mb-2 text-sm text-gray-600">
+                Address
+              </label>
+
               <input
                 type="text"
                 id="address"
@@ -45,8 +48,8 @@
             </div>
             <div class="mb-4">
               <div
-                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 p-4 w-full"
-              >
+                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 p-4 w-full">
+
                 <label>
                   <input
                     type="radio"
@@ -56,16 +59,14 @@
                   />
 
                   <div
-                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500"
-                  >
+                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
                     <h2 class="font-medium text-gray-700">Male</h2>
                     <svg
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible"
-                    >
+                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -74,7 +75,6 @@
                     </svg>
                   </div>
                 </label>
-
                 <label>
                   <input
                     type="radio"
@@ -82,18 +82,17 @@
                     class="peer hidden"
                     name="gender"
                   />
-
                   <div
-                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500"
-                  >
+                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
+
                     <h2 class="font-medium text-gray-700">Female</h2>
                     <svg
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible"
-                    >
+                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
+
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -105,9 +104,10 @@
               </div>
             </div>
             <div class="mb-4">
-              <label for="phone" class="block mb-2 text-sm text-gray-600"
-                >Phone</label
-              >
+              <label for="phone" class="block mb-2 text-sm text-gray-600">
+                Phone
+              </label>
+
               <input
                 type="text"
                 id="phone"
@@ -117,9 +117,10 @@
               />
             </div>
             <div class="mb-4">
-              <label for="age" class="block mb-2 text-sm text-gray-600"
-                >Age</label
-              >
+              <label for="age" class="block mb-2 text-sm text-gray-600">
+                Age
+              </label>
+
               <input
                 type="text"
                 id="age"
@@ -129,9 +130,10 @@
               />
             </div>
             <div class="mb-4">
-              <label for="email" class="block mb-2 text-sm text-gray-600"
-                >Email</label
-              >
+              <label for="email" class="block mb-2 text-sm text-gray-600">
+                Email
+              </label>
+
               <input
                 type="email"
                 id="email"
@@ -142,8 +144,8 @@
             </div>
             <div class="mb-4">
               <div
-                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 p-4 w-full"
-              >
+                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 p-4 w-full">
+
                 <label>
                   <input
                     type="radio"
@@ -153,16 +155,16 @@
                   />
 
                   <div
-                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500"
-                  >
+                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
+
                     <h2 class="font-medium text-gray-700">Cafe</h2>
                     <svg
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible"
-                    >
+                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
+
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -181,16 +183,16 @@
                   />
 
                   <div
-                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500"
-                  >
+                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
+
                     <h2 class="font-medium text-gray-700">Non-cafe</h2>
                     <svg
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible"
-                    >
+                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
+
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -211,7 +213,7 @@
         </form>
         <div class="text-center"></div>
         <p class="text-xs text-gray-600 text-center mt-8">
-          &copy; 2023 WCS LAT
+          &copy; 2024 Igsoon
         </p>
       </div>
     </div>
