@@ -1,14 +1,27 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Welcome from './Pages/Welcome.vue';
-import Register from './Pages/Register.vue';
+import Welcome from './Pages/Students/Welcome.vue';
+import Home from './Pages/Students/Home.vue';
+import Register from './Pages/Students/Register.vue';
+import Login from './Pages/Students/Login.vue';
+import NewDepartment from './Pages/Departments/NewDepartment.vue';
+import NewCourse from './Pages/Courses/NewCourse.vue';
+import AddCourse from './Pages/Courses/AddCourses.vue';
+import Select from './Pages/AddCourse.vue';
+import axios from "axios";
 
 
 const router = createRouter({
     history: createWebHashHistory('/'),
     routes: [
                    
-        { path: '/', name: 'welcome', component: Welcome},
-        { path: '/register', name: 'register', component: Register },
+        { path: '/', component: Welcome},
+        { path: '/home', component: Home, name: 'home', beforeEnter:(to,from,next)=>{axios.get('/api/athenticated').then(()=>{next()}).catch(()=>{return next({name: 'Login'})})}},
+        { path: '/register', component: Register },
+        { path: '/login', component: Login, name: 'Login' },
+        { path: '/new-department', component: NewDepartment, name: 'NewDepartment' },
+        { path: '/new-course', component: NewCourse, name: 'NewCourse' },
+        { path: '/add-course', component: AddCourse, name: 'AddCourse' },
+        { path: '/select', component: Select, name: 'Select' },
        
     ]
 });

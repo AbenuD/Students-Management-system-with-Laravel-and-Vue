@@ -1,11 +1,50 @@
+<script setup>
+import {ref} from "vue";
+import axios from "axios";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+const form = ref({
+  name:"",
+  f_name:"",
+  address:"",
+  gender:"",
+  phone:"",
+  age:"",
+  email:"",
+  cafe:""
+})
+const errors = ref({});
+const processing = ref(false);
+function submit() {
+  if(processing.value) return;
+  processing.value = true;
+  axios
+    .post("/api/register/student", form.value)
+    .then((response) => {
+      errors.value ={};
+      console.log(response.data.message);
+      toast.success(response.data.message, {
+      autoClose: 1000,
+      });
+      form.value = {};
+    })
+    .catch((error) => {
+                errors.value = error.response.data.errors;
+                console.log(errors.value)
+           
+            
+        })
+    .finally(()=>(processing.value = false))
+}
+</script>
 <template>
   <section class="bg-[url('../Images/background.jpg')]">
-    <div class="min-h-screen flex items-center justify-center">
+    <div class="min-h-screen flex items-center justify-center mx-5">
       <div class="max-w-3/4 w-full p-6 bg-white rounded-lg shadow-lg">
         <h1 class="text-2xl font-semibold text-center text-gray-500 mt-8 mb-6">
           Register
         </h1>
-        <form>
+        <div class="mx-10">
           <div class="grid grid-cols-2 gap-4">
             <div class="mb-4">
               <label for="name" class="block mb-2 text-sm text-gray-600">
@@ -17,8 +56,10 @@
                 id="name"
                 name="name"
                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                v-model="form.name"
                 required
               />
+               <span class="text-red-600" v-if="errors.name">{{ errors.name[0] }}</span>
             </div>
             <div class="mb-4">
               <label for="f_name" class="block mb-2 text-sm text-gray-600">
@@ -30,8 +71,10 @@
                 id="f_name"
                 name="f_name"
                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                v-model="form.f_name"
                 required
               />
+               <span class="text-red-600" v-if="errors.f_name">{{ errors.f_name[0] }}</span>
             </div>
             <div class="mb-4">
               <label for="address" class="block mb-2 text-sm text-gray-600">
@@ -43,8 +86,10 @@
                 id="address"
                 name="address"
                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                v-model="form.address"
                 required
               />
+               <span class="text-red-600" v-if="errors.address">{{ errors.address[0] }}</span>
             </div>
             <div class="mb-4">
               <div
@@ -53,8 +98,9 @@
                 <label>
                   <input
                     type="radio"
-                    value="1"
+                    :value=1
                     class="peer hidden"
+                    v-model="form.gender"
                     name="gender"
                   />
 
@@ -78,9 +124,10 @@
                 <label>
                   <input
                     type="radio"
-                    value="2"
+                    :value=2
                     class="peer hidden"
                     name="gender"
+                    v-model="form.gender"
                   />
                   <div
                     class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
@@ -102,6 +149,7 @@
                   </div>
                 </label>
               </div>
+               <span class="text-red-600" v-if="errors.gender">{{ errors.gender[0] }}</span>
             </div>
             <div class="mb-4">
               <label for="phone" class="block mb-2 text-sm text-gray-600">
@@ -113,8 +161,10 @@
                 id="phone"
                 name="phone"
                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                v-model="form.phone"
                 required
               />
+               <span class="text-red-600" v-if="errors.phone">{{ errors.phone[0] }}</span>
             </div>
             <div class="mb-4">
               <label for="age" class="block mb-2 text-sm text-gray-600">
@@ -126,8 +176,10 @@
                 id="age"
                 name="age"
                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                v-model="form.age"
                 required
               />
+               <span class="text-red-600" v-if="errors.age">{{ errors.age[0] }}</span>
             </div>
             <div class="mb-4">
               <label for="email" class="block mb-2 text-sm text-gray-600">
@@ -139,8 +191,10 @@
                 id="email"
                 name="email"
                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                v-model="form.email"
                 required
               />
+               <span class="text-red-600" v-if="errors.email">{{ errors.email[0] }}</span>
             </div>
             <div class="mb-4">
               <div
@@ -149,10 +203,11 @@
                 <label>
                   <input
                     type="radio"
-                    value="1"
+                    :value=1
                     class="peer hidden"
                     name="cafe"
-                  />
+                    v-model="form.cafe"
+                  /> 
 
                   <div
                     class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
@@ -177,9 +232,10 @@
                 <label>
                   <input
                     type="radio"
-                    value="2"
+                    :value=2
                     class="peer hidden"
                     name="cafe"
+                    v-model="form.cafe"
                   />
 
                   <div
@@ -202,15 +258,16 @@
                   </div>
                 </label>
               </div>
+              <span class="text-red-600" v-if="errors.cafe">{{ errors.cafe[0] }}</span>
             </div>
           </div>
           <button
-            type="submit"
-            class="w-1/4 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white text-2xl py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 mb-2"
+            @click="submit()"
+            class="w-1/4 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white text-2xl py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 hover:cyan-600 mb-2"
           >
             Register
           </button>
-        </form>
+        </div>
         <div class="text-center"></div>
         <p class="text-xs text-gray-600 text-center mt-8">
           &copy; 2024 Igsoon
