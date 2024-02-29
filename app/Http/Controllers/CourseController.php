@@ -6,7 +6,7 @@ use App\Models\Course;
 use App\Imports\CoursesImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Support\Facades\Log;
 class CourseController extends Controller
 {
     /**
@@ -32,20 +32,29 @@ class CourseController extends Controller
     {
         //
     }
+    
+
+    // in the controller part below
     public function uploadCourses(Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
         ]);
-
+    
         $file = $request->file('file');
+
+        Log::info('Uploaded file: ' . $file->getClientOriginalName());
 
         try {
             Excel::import(new CoursesImport, $file);
-
+            Log::info('Courses imported successfully');
             return response()->json(['message' => 'Courses uploaded successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Error uploading courses'], 500);
+            // Log the exception for debugging purposes
+            Log::error('Error uploading courses: ' . $e->getMessage());
+    
+            // Return a response with the error message
+            return response()->json(['message' => 'Error uploading courses: ' . $e->getMessage()], 500);
         }
     }
     /**

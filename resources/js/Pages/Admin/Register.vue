@@ -3,6 +3,7 @@ import {ref} from "vue";
 import axios from "axios";
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import RadioStyle from "../../Components/RadioStyle.vue"
 const form = ref({
   name:"",
   f_name:"",
@@ -209,24 +210,7 @@ function submit() {
                     v-model="form.cafe"
                   /> 
 
-                  <div
-                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
-
-                    <h2 class="font-medium text-gray-700">Cafe</h2>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
-
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
+                <RadioStyle name="Cafe" />
                 </label>
 
                 <label>
@@ -238,24 +222,7 @@ function submit() {
                     v-model="form.cafe"
                   />
 
-                  <div
-                    class="hover:bg-gray-50 flex items-center justify-between px-4 py-2 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
-
-                    <h2 class="font-medium text-gray-700">Non-cafe</h2>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-9 h-9 text-blue-600 invisible group-[.peer:checked+&]:visible">
-
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
+                  <RadioStyle name="Non-Cafe" />
                 </label>
               </div>
               <span class="text-red-600" v-if="errors.cafe">{{ errors.cafe[0] }}</span>

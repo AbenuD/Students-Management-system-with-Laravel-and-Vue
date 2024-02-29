@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
-
+use Illuminate\Support\Facades\Log;
 class CoursesImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading, WithValidation
 {
     /**
@@ -19,17 +19,26 @@ class CoursesImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
     */
     public function model(array $row)
     {
-        return new Course([
-           'courseName'     => $row[0],
-           'creditHour'    => $row[1], 
-        ]);
+        Log::info('Processing row: ' . json_encode($row));
+     
+
+        if (!empty($row['name']) && !empty($row['code']) && !empty($row['chr'])) {
+            return new Course([
+                'courseName' => $row['name'],
+                'courseCode' => $row['code'],
+                'creditHour' => $row['chr'], 
+            ]);
+        }
+        Log::error('Empty courseName or courseCode');
+        return null;
     }
 
     public function rules(): array
     {
         return [
-            'courseName' => 'required|string|max:255',
-            'creditHour' => 'required|numeric',
+            'courseName' => 'string|max:255',
+            'courseCode' => 'string|max:255',
+            'creditHour' => 'numeric',
             // Add more validation rules for other fields
         ];
     }
