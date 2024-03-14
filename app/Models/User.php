@@ -43,4 +43,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function department(){
+        return $this->belongsTo(Department::class);
+    }
+
+    public function teacherCourses()
+{
+    return $this->belongsToMany(Course::class, 'teacher_courses', 'teacher_id', 'course_id')
+                ->withTimestamps();
+}
+
+// For students
+public function studentCourses()
+{
+    return $this->belongsToMany(Course::class, 'mark_lists', 'student_id', 'course_id')
+                
+                ->withTimestamps();
+}
+    
+    public function departmentCourses()
+    {
+        return $this->hasMany(DepartmentCourses::class);
+    }
+    public function markLists()
+    {
+        return $this->hasMany(MarkList::class);
+    }
 }

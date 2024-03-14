@@ -1,22 +1,23 @@
 <script setup>
 import { ref } from 'vue';
   const option = ref(false);
+  defineProps({name:String})
 </script>
 <template>
-     <header class="bg-white w-full">
+     <header class="bg-gray-100 w-full">
         <div
             class="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-teal-700 lg:px-8"
         >
             <div class="relative flex h-16 justify-between">
                 <div class="relative z-10 flex px-2 lg:px-0">
                     <div class="flex flex-shrink-0 items-center">
-                        <h1>{user.name}</h1>
+                        <h1>{{name}}</h1>
                     </div>
                 </div>
                 <div
                     class="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0"
                 >
-                    <div class="w-full sm:max-w-xs">
+                    <!-- <div class="w-full sm:max-w-xs">
                         <label for="search" class="sr-only">Search</label>
                         <div class="relative">
                             <div
@@ -43,7 +44,7 @@ import { ref } from 'vue';
                                 type="search"
                             />
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="relative z-10 flex items-center lg:hidden"></div>
                 <div

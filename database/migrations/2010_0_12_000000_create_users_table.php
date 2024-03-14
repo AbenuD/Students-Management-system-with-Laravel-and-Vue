@@ -21,12 +21,12 @@ return new class extends Migration
             $table->string('address');
             $table->integer('age');
             $table->boolean('gender');
-            $table->boolean('cafe');
+            $table->boolean('cafe')->nullable();
             $table->integer('phone');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('department_id')->nullable();
+            $table->foreignId('department_id')->nullable()->constrained()->onDelete('cascade');
             $table->integer('batch');
             $table->rememberToken();
             $table->timestamps();

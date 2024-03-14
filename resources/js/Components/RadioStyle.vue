@@ -2,7 +2,7 @@
 defineProps({name: String})
 </script>
 <template>
-    <div class="hover:bg-gray-50 flex items-center justify-between px-4 mt-5 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
+    <div class="hover:bg-gray-50 flex items-center justify-between px-4 border-2 rounded-lg cursor-pointer text-sm border-gray-200 group peer-checked:border-blue-500">
         <h2 class="font-medium text-gray-700">{{name}}</h2>
         <svg
             fill="none"

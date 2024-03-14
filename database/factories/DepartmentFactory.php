@@ -17,7 +17,10 @@ class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'departmentName' => fake()->word(),
+            'noYears' => $this->faker->numberBetween(1, 5),
+            'updated_at' => now(),
+            'created_at' => now(),
         ];
     }
 }

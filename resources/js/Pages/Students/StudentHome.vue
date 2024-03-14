@@ -3,28 +3,30 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import Navbar from "../../Components/Navbar.vue"
+import { useAuthStore } from "../../Src/Store/auth.js";
+
 const router = useRouter();
-const option = ref(false);
 const user = ref({});
-function getUser() {
-    axios.get("/api/user").then((response) => {
-        user.value = response.data;
-        console.log(user.value);
-    });
-}
+user.value = useAuthStore().getUser;
+// function getUser() {
+//     axios.get("/api/user").then((response) => {
+//         user.value = response.data;
+//         console.log(user.value);
+//     });
+// }
 function logout() {
     axios.post("/api/logout").then(() => {
         router.push("/login");
     });
 }
-onMounted(() => {
-    getUser();
-});
+// onMounted(() => {
+//     getUser();
+// });
 </script>
 <template>
     <!-- Header -->
     <!-- component -->
-    <Navbar />
+    <Navbar :name=user.name  />
     <!-- component -->
     <div class="h-screen flex flex-col bg-gray-100 shadow-xl overflow-y-scroll">
         <div class="bg-sky-300 shadow-lg pb-3 rounded-b-3xl">
@@ -79,7 +81,7 @@ onMounted(() => {
             </div>            
             <div class="col-span-1 p-3 hover:bg-gray-100 hover:text-blue-600 ">
                 <div class="flex flex-col items-center">
-                    <a href="">
+                    <router-link to="/grade">
                         <button class="tr-300">
                             <svg
                                 class="h-14 w-14 "
@@ -94,7 +96,7 @@ onMounted(() => {
                             </svg>
                             <span class="text-lg font-medium">Grade</span>
                         </button>
-                      </a>
+                      </router-link>
                 </div>
             </div>
             <div class="col-span-1 p-3 hover:bg-gray-100 hover:text-blue-600">
@@ -164,7 +166,7 @@ onMounted(() => {
 
             <div class="col-span-1 p-3 hover:bg-gray-100 hover:text-blue-600">
                 <div class="flex flex-col items-center">
-                    <a href="">
+                    <router-link to="/student/request">
                         <button class="tr-300 ">
                           <svg class="w-14 h-14" 
                           viewBox="0 0 24 24"
@@ -173,7 +175,7 @@ onMounted(() => {
                           </svg>
                             <span class="text-lg font-medium mt-10">Registeration</span>
                         </button>
-                        </a>
+                    </router-link>
                 </div>
             </div>
 
@@ -221,8 +223,7 @@ onMounted(() => {
 
             <div class="col-span-1 bg-red-50 p-3 hover:bg-red-100 hover:text-red-600">
                 <div class="flex flex-col items-center">
-                    <a href="">
-                        <button class="tr-300">
+                        <button @click="logout" class="tr-300">
                             <svg
                                 class="h-14 w-14 "
                                 fill="none"
@@ -237,8 +238,7 @@ onMounted(() => {
                                 />
                             </svg>
                             <span class="text-lg font-medium">Logout</span>
-                        </button></a
-                    >
+                        </button>
                 </div>
             </div>
         </div>

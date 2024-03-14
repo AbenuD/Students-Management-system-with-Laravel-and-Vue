@@ -17,7 +17,12 @@ class courseFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'courseName' => fake()->word(),
+            'courseCode' => fake()->unique()->word() ,
+            'creditHour' => $this->faker->numberBetween(1, 5),
+            'updated_at' => now(),
+            'created_at' => now(),
         ];
     }
+
 }

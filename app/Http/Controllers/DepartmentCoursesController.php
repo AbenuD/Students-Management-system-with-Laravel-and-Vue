@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\DepartmentCourses;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,15 @@ class DepartmentCoursesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DepartmentCourses $departmentCourses)
+    public function show($departmentId, $year, $semister)
     {
-        //
+       
+        $courses = Course::whereHas('departments', function ($query) use ($departmentId, $year, $semister) {
+            $query->where('department_id', $departmentId)
+                ->where('year', $year)
+                ->where('semister', $semister);
+        })->get();
+        return response()->json($courses);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -21,17 +22,19 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = User::class;
     public function definition(): array
     {
         return [
             'name' => fake()->name(),
             'f_name' => fake()->name(),
-            'address' => fake()->name(),
-            'gender' => 1,
+            'address' => fake()->address(),
+            'gender' => $this->faker->boolean(),
             'phone' => 911,
-            'age' => 22,
-            'cafe' => 1,
-            'batch' => 2016,
+             'department_id' => 1,
+            'age' => $this->faker->numberBetween(21, 55),
+            'cafe' => $this->faker->boolean(),
+            'batch' => $this->faker->numberBetween(2020, 2025),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'updated_at' => now(),
@@ -49,5 +52,13 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            // Assign a role to the user after it has been created
+            $user->assignRole('teacher'); // Replace 'student' with the actual role name
+        });
     }
 }

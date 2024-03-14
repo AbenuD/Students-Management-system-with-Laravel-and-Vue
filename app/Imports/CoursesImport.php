@@ -10,6 +10,8 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Collection;
+
 class CoursesImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading, WithValidation
 {
     /**
@@ -21,29 +23,39 @@ class CoursesImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
     {
         Log::info('Processing row: ' . json_encode($row));
      
-
-        if (!empty($row['name']) && !empty($row['code']) && !empty($row['chr'])) {
-            return new Course([
-                'courseName' => $row['name'],
-                'courseCode' => $row['code'],
-                'creditHour' => $row['chr'], 
-            ]);
+        if (!isset($row['name']) || !isset($row['code']) || !isset($row['chr'])) {
+            Log::error('Invalid row: ' . json_encode($row));
+            return null; // Skip this row
         }
-        Log::error('Empty courseName or courseCode');
-        return null;
+
+        $courseName = $row['name'];
+        $courseCode = $row['code'];
+        $creditHour = $row['chr'];
+
+        if (!empty($courseCode) && !empty($courseName) && !empty($creditHour)) {
+            $course = Course::updateOrCreate(
+                ['courseCode' => $courseCode],
+                ['courseName' => $courseName, 'creditHour' => $creditHour]
+            );
+
+            return $course;
+        } else {
+            Log::error('Empty courseName or courseCode: ' . json_encode($row));
+            return null;
+        }
     }
 
     public function rules(): array
     {
         return [
-            'courseName' => 'string|max:255',
-            'courseCode' => 'string|max:255',
-            'creditHour' => 'numeric',
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:255',
+            'chr' => 'required|numeric',
             // Add more validation rules for other fields
         ];
     }
 
-        public function batchSize(): int
+    public function batchSize(): int
     {
         return 100; // Set the number of rows that should be validated and inserted at a time
     }
@@ -53,4 +65,3 @@ class CoursesImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
         return 1000; // Set the number of rows that should be read into memory at a time
     }
 }
-

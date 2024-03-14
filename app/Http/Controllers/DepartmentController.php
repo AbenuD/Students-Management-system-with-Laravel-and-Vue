@@ -13,7 +13,16 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+
+        return Department::all()->map(function ($department) {
+            return [
+            'id' => $department->id,
+            'departmentName' => $department->departmentName,
+            'noYears' => $department->noYears,
+        ];
+    });
+                
+
     }
 
     /**
@@ -54,7 +63,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        
     }
 
     /**
